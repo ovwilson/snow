@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
 
 import { HttpClientModule } from '@angular/common/http';
 
