@@ -21,7 +21,10 @@ export class NoopInterceptor implements HttpInterceptor {
 
     local(req: HttpRequest<any>, next: HttpHandler, started: string): Observable<HttpEvent<any>> {
         console.log(`Local Server Request: ${(window as any).location.origin}`, req.url);
-        return next.handle(req).pipe(
+        return of(req).pipe(
+            map(req => this.clone(req, { url: `http://localhost:3000${req.url}` })),
+            tap(req => console.log('req', req)),
+            mergeMap(req => next.handle(req)),
             tap(() => this.log(req, started)));
     }
 
@@ -30,8 +33,8 @@ export class NoopInterceptor implements HttpInterceptor {
             tap(() => this.log(req, started)));
     }
 
-    clone(req: HttpRequest<any>) {
-        return req.clone(req);
+    clone(req: HttpRequest<any>, params: any) {
+        return req.clone(params);
     }
 
     log(req: HttpRequest<any>, started: string) {
