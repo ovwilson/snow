@@ -5,6 +5,7 @@ import {
 
 import { Observable, of, onErrorResumeNext } from 'rxjs';
 import { tap, map, mergeMap } from 'rxjs/operators';
+import { NOWHeaders, defaultHeaders } from './features';
 
 /** Pass untouched request through to the next request handler. */
 @Injectable()
@@ -22,14 +23,16 @@ export class NoopInterceptor implements HttpInterceptor {
     local(req: HttpRequest<any>, next: HttpHandler, started: string): Observable<HttpEvent<any>> {
         console.log(`Local Server Request: ${(window as any).location.origin}`, req.url);
         return of(req).pipe(
-            map(req => this.clone(req, { url: `http://localhost:3000${req.url}` })),
+            map(req => this.clone(req, { url: `http://localhost:3000${req.url}`, headers: defaultHeaders()  })),
             tap(req => console.log('req', req)),
             mergeMap(req => next.handle(req)),
             tap(() => this.log(req, started)));
     }
 
     server(req: HttpRequest<any>, next: HttpHandler, started: string): Observable<HttpEvent<any>> {
-        return next.handle(req).pipe(
+        return of(req).pipe(
+            map(req => this.clone(req, { headers: NOWHeaders() })),
+            mergeMap(req => next.handle(req)),
             tap(() => this.log(req, started)));
     }
 

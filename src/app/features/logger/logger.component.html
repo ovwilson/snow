@@ -1,0 +1,18 @@
+<mat-accordion fxHide.xs="false" fxHide.lg="{{ hide }} " fxHide.md="{{ hide }}" fxHide.sm="{{ hide }}">
+
+    <mat-expansion-panel *ngFor="let c of content">
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ c.title }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ c.description }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+        {{ c.html }}
+     
+    </mat-expansion-panel>
+
+  </mat-accordion>
+  

@@ -7,6 +7,6 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  get(url: string, headers: HttpHeaders ) { return this.http.get(url, { headers } ); }
+  get(url: string) { return this.http.get(url); }
 
 }
