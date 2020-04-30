@@ -1,0 +1,31 @@
+<mat-accordion fxHide>
+
+    <mat-expansion-panel *ngIf="input$ | async as input">
+
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Search Term:
+            </mat-panel-title>
+            <mat-panel-description>
+                {{ input }}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre>
+
+            {{ input | json }}
+      </pre>
+
+    </mat-expansion-panel>
+
+</mat-accordion>
+
+<mat-form-field>
+    <input type="text" placeholder="Enter a name" aria-label="User" matInput [formControl]="myControl"
+        [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of users$ | async" [value]="option?.name">
+            <span>{{ option?.name }} ({{ option.email }})</span>
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>

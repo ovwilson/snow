@@ -9,17 +9,23 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppService } from './app.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
-
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { SharedModule } from './shared/shared.features';
 
+import { HomeComponent } from './containers/home/home.component';
+import { AwardComponent } from './containers/awards/award.component';
+import { reducers } from './app.reducer';
+import * as fromEffects from './app.effects'; 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    AwardComponent
   ],
   imports: [
     BrowserModule,
@@ -27,11 +33,11 @@ import { SharedModule } from './shared/shared.features';
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreModule.forRoot(reducers, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([fromEffects.UserEffects])
   ],
   providers: [
-    AppService,
     PreloadSelectedModules,
     { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptor, multi: true },
     { provide: APP_BASE_HREF, useValue: '/' }],

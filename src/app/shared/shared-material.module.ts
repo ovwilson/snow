@@ -23,6 +23,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 const COMPONENT_MODULES = [
   ReactiveFormsModule,
@@ -46,11 +48,12 @@ const COMPONENT_MODULES = [
   MatTableModule,
   MatCheckboxModule,
   MatDividerModule,
-  MatMenuModule
+  MatMenuModule,
+  MatAutocompleteModule
 ];
 
 @NgModule({
   imports: [COMPONENT_MODULES],
   exports: [COMPONENT_MODULES]
 })
-export class SharedMaterialModule {}
+export class SharedMaterialModule { }
