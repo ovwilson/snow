@@ -34,8 +34,11 @@ import * as fromEffects from './app.effects';
     AppRoutingModule,
     SharedModule,
     StoreModule.forRoot(reducers, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([fromEffects.UserEffects])
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true }),
+    EffectsModule.forRoot([
+      fromEffects.UserEffects,
+      fromEffects.DictionariesEffects
+    ])
   ],
   providers: [
     PreloadSelectedModules,

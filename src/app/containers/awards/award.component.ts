@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, startWith, tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import * as fromRoot from './../../app.reducer';
 import { Store } from '@ngrx/store';
-import { UsersPageActions, UsersAPIActions, User, fromUsersSelectors } from './../../features';
+import { UsersPageActions, UsersAPIActions, User, fromUsersSelectors, DictionariesAPIActions } from './../../features';
 
 @Component({
     templateUrl: './award.component.html'
@@ -22,6 +22,8 @@ export class AwardComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+        this.store.dispatch(DictionariesAPIActions.SearchDictionaries({ table: 'x_398178_award_fee_props' }));
 
         this.input$ = this.myControl.valueChanges.pipe(
             debounceTime(400),

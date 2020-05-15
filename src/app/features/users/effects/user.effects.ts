@@ -14,15 +14,16 @@ export class UserEffects {
     private uri = '/api/now/table/sys_user';
     private query = 'sysparm_query=nameSTARTSWITH{{userName}}';
     private limit = 'sysparm_limit=40';
-    private fields = 'sysparm_fields=';
+    private fields = 'sysparm_fields=sys_id,first_name,last_name,middle_name,username,name,email';
 
     getUsers$ = createEffect(() => this.actions$.pipe(
         ofType(UsersAPIActions.SearchUsers),
-        map((payload: any) => `${this.uri}?${this.query.replace('{{userName}}', payload.term)}&${this.limit}`),
+        map((payload: any) => `${this.uri}?${this.query.replace('{{userName}}', payload.term)}&${this.limit}&${this.fields}`),
         mergeMap((url: string) => this.service.get(url).pipe(
             map((data: User[]) => UsersPageActions.AddUsers({ models: data })),
             catchError(() => EMPTY))
         )));
+
 
     constructor(private actions$: Actions, private service: APIService) { }
 }
