@@ -1,5 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from './../models/user';
+import { User, UserRole } from './../models/user';
 
 export const Enter = createAction('[Users Page] Enter');
-export const AddUsers = createAction('[Users Page] Add Users', props<{ models: User[] }>());
+
+export const AddUsers = createAction('[Users API] Add Users', props<{ models: User[] }>());
+export const AddUserRoles = createAction('[Users API] Add User Roles', props<{ model: UserRole }>());
+

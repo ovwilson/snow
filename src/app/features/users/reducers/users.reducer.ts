@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { User } from './../models/user';
+import { User, UserRole } from './../models/user';
 import { UsersAPIActions, UsersPageActions } from './../actions';
 
 export const adapter: EntityAdapter<User> = createEntityAdapter<User>({
@@ -9,14 +9,17 @@ export const adapter: EntityAdapter<User> = createEntityAdapter<User>({
 
 export interface State extends EntityState<User> {
     activeId: number | null;
+    activeRoles: UserRole;
 }
 
 export const initialState: State = adapter.getInitialState({
     activeId: null,
+    activeRoles: { roles: [], user_roles: [] }
 });
 
 const defaultReducer = createReducer(initialState,
-    on(UsersPageActions.AddUsers, (state, { models }) => adapter.addAll(models, { ...state, selectedId: null }))
+    on(UsersPageActions.AddUsers, (state, { models }) => adapter.addAll(models, { ...state, selectedId: null })),
+    on(UsersPageActions.AddUserRoles, (state, { model }) => ({ ...state, activeRoles: model }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

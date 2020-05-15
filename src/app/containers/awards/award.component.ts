@@ -25,6 +25,9 @@ export class AwardComponent implements OnInit {
 
         this.store.dispatch(DictionariesAPIActions.SearchDictionaries({ table: 'x_398178_award_fee_props' }));
 
+        this.store.dispatch(UsersAPIActions.FindUserRoles());
+
+
         this.input$ = this.myControl.valueChanges.pipe(
             debounceTime(400),
             distinctUntilChanged(),

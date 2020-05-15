@@ -10,6 +10,11 @@ export interface User extends Base {
     email: string;
 }
 
+export interface UserRole {
+    roles: string[];
+    user_roles: string[];
+}
+
 export const FakerUser: () => User = () => {
     const card = faker.helpers.createCard();
     return {
