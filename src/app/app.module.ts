@@ -18,6 +18,10 @@ import { SharedModule } from './shared/shared.features';
 
 import { HomeComponent } from './containers/home/home.component';
 import { AwardComponent } from './containers/awards/award.component';
+import { FilterComponent } from './containers/filter/filter.component';
+
+import { FilterDirective } from './containers/filter/filter.directive';
+
 import { reducers } from './app.reducer';
 import * as fromEffects from './app.effects'; 
 
@@ -25,7 +29,9 @@ import * as fromEffects from './app.effects';
   declarations: [
     AppComponent,
     HomeComponent,
-    AwardComponent
+    AwardComponent,
+    FilterComponent,
+    FilterDirective
   ],
   imports: [
     BrowserModule,

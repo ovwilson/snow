@@ -12,3 +12,16 @@ main {
 mat-form-field {
   width: 100% !important;
 }
+
+.ghost:empty {
+  height: 400px;
+  width: 400px;
+  background-image: radial-gradient(circle 20px, #ccc, 100%, transparent),
+  linear-gradient(#ccc, #ccc),
+  linear-gradient(#ccc, #ccc),
+  linear-gradient(#ccc, #ccc),
+  linear-gradient(#f1f1f1, #f1f1f1);
+  background-size: 48px 48px, 90% 40px, 90% 40px,90% 40px,100% 100%;
+  background-position: 50% 50px, 50% 150px, 50% 220px, 50% 290px, 0 0;
+  background-repeat: no-repeat;
+}

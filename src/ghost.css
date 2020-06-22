@@ -1,4 +1,4 @@
-.ghost:empty {
+.ghost_card:empty {
     height: 400px;
     width: 400px;
     background-image: radial-gradient(circle 20px, #ccc, 100%, transparent),
